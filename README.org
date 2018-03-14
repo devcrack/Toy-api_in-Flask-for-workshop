@@ -1,0 +1,4 @@
+* How to Run 
+  1. Change to directory source and execute this command:
+     source server/bin/activate
+
