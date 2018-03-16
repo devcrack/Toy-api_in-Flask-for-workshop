@@ -2,7 +2,7 @@ import json, io
 import glob, os
 
 
-path = '/home/delcracnk/REPOSITORIES/Bank_Models/01Sk_HSphere/Benny_Version/Sk_F.dat'
+path = '/home/delcracnk/REPOSITORIES/Bank_Models/01Sk_HSphere/Benny_Version/data/sk_HSpheere.dat'
 try:
     to_unicode = unicode
 except NameError:
