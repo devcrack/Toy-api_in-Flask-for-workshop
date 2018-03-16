@@ -4,13 +4,14 @@ from flask_restful import Resource, Api
 from json import dumps
 from flask.ext.jsonpify import jsonify
 import subprocess               # Para ejecutar llamadas al sistema.
+import spawn_process
 
 #Importa la capsula de c++
 import hola
 import example
 
 app = Flask(__name__)           # Variable predifinida de python. Esto simplemente es una instancia de Flask.
-api = Api(app)                  # http://flask-restful.readthedocs.io/en/latest/api.html#flask_restful.Api 
+api = Api(app)                  # http://flask-restful.readthedocs.io/en/latest/api.html#flask_restful.Api
 
 class Saludo(Resource):
     def get(self, nombre):
@@ -21,12 +22,14 @@ class Mult(Resource):
     def get(self, num1, num2):
         result = {'res': example.Suma(int(num1), int(num2))}
         return jsonify(result)
-    
+
 class execute_hard_spheere(Resource):
     def get(self, name_file):
-        result = subprocess.Popen(["touch", name_file], stdout=subprocess.PIPE) #I dont know
-        string = {'result', name_file}
-        return 0;
+        # result = subprocess.Popen(["touch", name_file], stdout=subprocess.PIPE) #I dont know
+        # string = {'result', name_file}
+
+
+        return spawn_process.exe_hard_sphere()
 # return jsonify(string)
 
 #add_resource(resource, *urls, **kwargs)
