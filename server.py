@@ -3,8 +3,11 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from json import dumps
 from flask.ext.jsonpify import jsonify
+from flask import send_file
 import subprocess               # Para ejecutar llamadas al sistema.
 import spawn_process
+import copy_file
+
 
 #Importa la capsula de c++
 import hola
@@ -30,11 +33,21 @@ class execute_hard_spheere(Resource):
         # string = {'result', name_file}
         return spawn_process.exe_hard_sphere(frac_vol)
 
+
+class exe_hard_sphere_get_file(Resource):
+    def get(self):
+        copy_file.copy_files('/home/delcracnk/REPOSITORIES/Bank_Models/01Sk_HSphere/Benny_Version/data/sk_HSpheere.dat')
+
+        return send_file('./SKhard_sphere.dat', attachment_filename='SKhard_sphere.dat')
+
+
 #add_resource(resource, *urls, **kwargs)
 #resource (Resource) – the class name of your resource
 api.add_resource(Saludo, '/saludo/<nombre>') # Route_3
 api.add_resource(Mult, '/saludo/<num1>/<num2>')
 api.add_resource(execute_hard_spheere, '/exe_hard_spheere/<frac_vol>')
+api.add_resource(exe_hard_sphere_get_file, '/hard_sphere/SK.dat')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0" ,port=5002,debug=True)
